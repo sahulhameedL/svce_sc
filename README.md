@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Club - SVCE | Innovate. Discover. Excel.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue: #e0f2fe;
+            --dark-text: #1e293b;
+            --light-text: #64748b;
+            --white: #ffffff;
+            --section-gray: #f8fafc;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            animation: slideDown 0.5s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-blue);
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .join-btn {
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .join-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--light-blue) 0%, rgba(255,255,255,0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text .mission {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Achievements Section */
+        .achievements {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 5rem 2rem;
+            background: var(--section-gray);
+        }
+
+        .events-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent-blue);
+        }
+
+        .event-card:hover {
+            transform: translateX(10px);
+        }
+
+        .event-date {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .date-box {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .date-day {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .date-month {
+            font-size: 0.9rem;
+        }
+
+        .event-details h3 {
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-time {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: var(--dark-text);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .register-btn {
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .register-btn:hover {
+            background: var(--primary-blue);
+        }
+
+        /* Membership Section */
+        .membership {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .membership-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: url('svce.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .membership-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .membership h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .membership p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-text);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid,
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="svce.jpg" alt="SVCE Science Club Logo">
+                <span>Science Club SVCE</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#achievements">Projects</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#membership">Join Us</a></li>
+            </ul>
+            <a href="#membership" class="join-btn">Become a Member</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Innovate.<br>Discover.<br>Excel.</h1>
+                <p class="subtitle">Sri Venkateswara College of Engineering Science Club</p>
+                <p class="mission">
+                    Join a community of passionate innovators pushing the boundaries of scientific discovery. 
+                    From quantum computing to biotechnology, we're shaping tomorrow's breakthroughs today.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Research Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Awards Won</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="svce.jpg" alt="SVCE Science Club Students">
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements" id="achievements">
+        <div class="section-header">
+            <h2>Our Scientific Achievements</h2>
+            <p>Breakthrough projects led by SVCE students that are making real-world impact</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="svce.jpg" alt="AI Disease Detection Project">
+                    <div class="project-image-overlay">AI Research</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">AI-Powered Disease Detection</h3>
+                    <p class="project-description">
+                        Developed a machine learning model achieving 94% accuracy in early-stage cancer detection using medical imaging.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Healthcare</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="svce.jpg" alt="Solar Energy Project">
+                    <div class="project-image-overlay">Energy Innovation</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Solar Energy Optimization System</h3>
+                    <p class="project-description">
+                        Created an IoT-based system that increases solar panel efficiency by 32% through real-time tracking and adjustment.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">IoT</span>
+                        <span class="tag">Renewable Energy</span>
+                        <span class="tag">Arduino</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="svce.jpg" alt="Quantum Computing Research">
+                    <div class="project-image-overlay">Quantum Computing</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Quantum Algorithm Research</h3>
+                    <p class="project-description">
+                        Pioneering research on quantum algorithms for cryptography, published in international journal.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Quantum Computing</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Qiskit</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="svce.jpg" alt="Robotics Project">
+                    <div class="project-image-overlay">Robotics</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Autonomous Rescue Robot</h3>
+                    <p class="project-description">
+                        Built an autonomous robot capable of navigating disaster zones and locating survivors using thermal imaging.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Robotics</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">ROS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="svce.jpg" alt="Biotechnology Innovation">
+                    <div class="project-image-overlay">Biotechnology</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Biodegradable Plastics Research</h3>
+                    <p class="project-description">
+                        Developed a new biodegradable plastic compound that decomposes 5x faster than conventional alternatives.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Biotechnology</span>
+                        <span class="tag">Sustainability</span>
+                        <span class="tag">Chemistry</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="svce.jpg" alt="Space Technology Project">
+                    <div class="project-image-overlay">Space Tech</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">CubeSat Development</h3>
+                    <p class="project-description">
+                        Designing and building a CubeSat for atmospheric research in collaboration with ISRO.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Space Tech</span>
+                        <span class="tag">Electronics</span>
+                        <span class="tag">ISRO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <div class="events-container">
+            <div class="section-header">
+                <h2>Upcoming Events & Workshops</h2>
+                <p>Don't miss these exciting opportunities to learn, network, and innovate</p>
+            </div>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="date-box">
+                            <div class="date-day">15</div>
+                            <div class="date-month">DEC</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>AI & Machine Learning Bootcamp</h3>
+                            <p class="event-time">📍 Tech Lab 3 | ⏰ 9:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                    <p class="event-description">
+                        Intensive hands-on workshop covering neural networks, deep learning, and practical applications. 
+                        Build your first AI model with industry experts from Google and Microsoft.
+                    </p>
+                    <a href="#" class="register-btn">Register Now</a>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="date-box">
+                            <div class="date-day">22</div>
+                            <div class="date-month">DEC</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Quantum Computing Symposium</h3>
+                            <p class="event-time">📍 Main Auditorium | ⏰ 2:00 PM - 6:00 PM</p>
+                        </div>
+                    </div>
+                    <p class="event-description">
+                        Special guest lecture by Dr. Rajesh Kumar from IISc on quantum algorithms and their applications. 
+                        Live demonstration of quantum computing using IBM Qiskit.
+                    </p>
+                    <a href="#" class="register-btn">Register Now</a>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="date-box">
+                            <div class="date-day">08</div>
+                            <div class="date-month">JAN</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Science Hackathon 2024</h3>
+                            <p class="event-time">📍 Innovation Center | ⏰ 48 Hours</p>
+                        </div>
+                    </div>
+                    <p class="event-description">
+                        48-hour hackathon to solve real-world scientific challenges. Top teams win internships at leading 
+                        research institutions and cash prizes worth ₹1,00,000.
+                    </p>
+                    <a href="#" class="register-btn">Register Now</a>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="date-box">
+                            <div class="date-day">18</div>
+                            <div class="date-month">JAN</div>
+                        </div>
+                        <div class="event-details">
+                            <h3>Research Paper Writing Workshop</h3>
+                            <p class="event-time">📍 Seminar Hall B | ⏰ 3:00 PM - 5:00 PM</p>
+                        </div>
+                    </div>
+                    <p class="event-description">
+                        Learn the art of scientific writing. Get your research published in international journals with 
+                        guidance from published researchers and journal editors.
+                    </p>
+                    <a href="#" class="register-btn">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Section -->
+    <section class="membership" id="membership">
+        <div class="membership-bg"></div>
+        <div class="membership-content">
+            <h2>Join the Future of Science at SVCE</h2>
+            <p>Become part of an elite community driving scientific innovation</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔬</div>
+                    <h4>Access to Labs</h4>
+                    <p>24/7 access to state-of-the-art research facilities</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">👥</div>
+                    <h4>Mentorship</h4>
+                    <p>Direct guidance from PhD scholars and industry experts</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏆</div>
+                    <h4>Competitions</h4>
+                    <p>Represent SVCE at national and international events</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💼</div>
+                    <h4>Internships</h4>
+                    <p>Exclusive opportunities at top research institutions</p>
+                </div>
+            </div>
+            
+            <a href="#" class="cta-button">Start Your Scientific Journey Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Science Club - Sri Venkateswara College of Engineering</p>
+            <p>Igniting Scientific Passion | Building Tomorrow's Innovators</p>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.project-card, .event-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Dynamic counter animation for stats
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + '+';
+                }
+            }, 30);
+        };
+
+        // Trigger counter animation when hero section is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = document.querySelectorAll('.stat-number');
+                    animateCounter(statNumbers[0], 150);
+                    animateCounter(statNumbers[1], 25);
+                    animateCounter(statNumbers[2], 12);
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(document.querySelector('.hero'));
+    </script>
+</body>
+</html>
